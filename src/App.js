@@ -63,6 +63,12 @@ export default function App() {
   return (
     <>
       <div className="App" style={{ position: "relative", height: "100vh" }}>
+        <form name="upload" method="POST" enctype="multipart/form-data" data-netlify="true">
+            <label for="file">Select an EPUB file:</label>
+            <input type="file" name="file" accept=".epub" required>
+            <br>
+            <input type="submit" value="Upload">
+        </form>
         <ReactReader
           location={location}
           locationChanged={locationChanged}
