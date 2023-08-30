@@ -7,7 +7,7 @@ import { ReactReader, ReactReaderStyle } from "react-reader";
  * Brisingr.epub                    - Swedish
  * Gulag_Archipelago.epub           - English
  */
-import Ebook from "./Eragon.epub";
+import Ebook from "./Humanism - a very short introduction.epub";
 
 const ownStyles = {
   ...ReactReaderStyle,
