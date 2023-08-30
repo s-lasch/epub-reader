@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./styles.css";
 import { ReactReader, ReactReaderStyle } from "react-reader";
+import axios from 'axios';
 
 /**
  * Eragon.epub                      - Swedish
@@ -13,7 +14,7 @@ const ownStyles = {
   ...ReactReaderStyle,
   arrow: {
     ...ReactReaderStyle.arrow,
-    color: "red"
+    color: "lightblue"
   }
 };
 
@@ -63,12 +64,6 @@ export default function App() {
   return (
     <>
       <div className="App" style={{ position: "relative", height: "100vh" }}>
-        <form name="upload" method="POST" enctype="multipart/form-data" data-netlify="true">
-            <label for="file">Select an EPUB file:</label>
-            <input type="file" name="file" accept=".epub" required />
-            <br></br>
-            <input type="submit" value="Upload" />
-        </form>
         <ReactReader
           location={location}
           locationChanged={locationChanged}
@@ -84,42 +79,6 @@ export default function App() {
             setSelections([]);
           }}
         />
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          bottom: "1rem",
-          right: "1rem",
-          zIndex: 1,
-          backgroundColor: "white"
-        }}
-      >
-        Selection:
-        <ul>
-          {selections.map(({ text, cfiRange }, i) => (
-            <li key={i}>
-              {text}{" "}
-              <button
-                onClick={() => {
-                  renditionRef.current.display(cfiRange);
-                }}
-              >
-                Show
-              </button>
-              <button
-                onClick={() => {
-                  renditionRef.current.annotations.remove(
-                    cfiRange,
-                    "highlight"
-                  );
-                  setSelections(selections.filter((item, j) => j !== i));
-                }}
-              >
-                x
-              </button>
-            </li>
-          ))}
-        </ul>
       </div>
     </>
   );
