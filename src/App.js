@@ -1,8 +1,10 @@
+import logo from './logo.svg';
+import './App.css';
 import React, { useRef, useState, useEffect } from "react";
 import "./styles.css";
 import { ReactReader, ReactReaderStyle } from "react-reader";
-import axios from 'axios';
 
+function App() {
 /**
  * Eragon.epub                      - Swedish
  * Brisingr.epub                    - Swedish
@@ -14,7 +16,7 @@ const ownStyles = {
   ...ReactReaderStyle,
   arrow: {
     ...ReactReaderStyle.arrow,
-    color: "lightblue"
+    color: "red"
   }
 };
 
@@ -62,6 +64,22 @@ export default function App() {
     }
   }, [setSelections, selections]);
   return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
     <>
       <div className="App" style={{ position: "relative", height: "100vh" }}>
         <ReactReader
@@ -79,6 +97,42 @@ export default function App() {
             setSelections([]);
           }}
         />
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          bottom: "1rem",
+          right: "1rem",
+          zIndex: 1,
+          backgroundColor: "white"
+        }}
+      >
+        Selection:
+        <ul>
+          {selections.map(({ text, cfiRange }, i) => (
+            <li key={i}>
+              {text}{" "}
+              <button
+                onClick={() => {
+                  renditionRef.current.display(cfiRange);
+                }}
+              >
+                Show
+              </button>
+              <button
+                onClick={() => {
+                  renditionRef.current.annotations.remove(
+                    cfiRange,
+                    "highlight"
+                  );
+                  setSelections(selections.filter((item, j) => j !== i));
+                }}
+              >
+                x
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
     </>
   );
