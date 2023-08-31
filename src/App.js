@@ -1,22 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
 import React, { useRef, useState, useEffect } from "react";
 import "./styles.css";
 import { ReactReader, ReactReaderStyle } from "react-reader";
 
-function App() {
 /**
  * Eragon.epub                      - Swedish
  * Brisingr.epub                    - Swedish
  * Gulag_Archipelago.epub           - English
  */
-import Ebook from "./Eragon.epub";
+import Ebook from "./humanism.epub";
 
 const ownStyles = {
   ...ReactReaderStyle,
   arrow: {
     ...ReactReaderStyle.arrow,
-    color: "red"
+    color: "lightblue"
   }
 };
 
@@ -64,22 +61,6 @@ export default function App() {
     }
   }, [setSelections, selections]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
     <>
       <div className="App" style={{ position: "relative", height: "100vh" }}>
         <ReactReader
@@ -97,42 +78,6 @@ export default function App() {
             setSelections([]);
           }}
         />
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          bottom: "1rem",
-          right: "1rem",
-          zIndex: 1,
-          backgroundColor: "white"
-        }}
-      >
-        Selection:
-        <ul>
-          {selections.map(({ text, cfiRange }, i) => (
-            <li key={i}>
-              {text}{" "}
-              <button
-                onClick={() => {
-                  renditionRef.current.display(cfiRange);
-                }}
-              >
-                Show
-              </button>
-              <button
-                onClick={() => {
-                  renditionRef.current.annotations.remove(
-                    cfiRange,
-                    "highlight"
-                  );
-                  setSelections(selections.filter((item, j) => j !== i));
-                }}
-              >
-                x
-              </button>
-            </li>
-          ))}
-        </ul>
       </div>
     </>
   );
