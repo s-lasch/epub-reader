@@ -8,7 +8,7 @@ import axios from 'axios';
  * Brisingr.epub                    - Swedish
  * Gulag_Archipelago.epub           - English
  */
-import Ebook from "./humanism.epub";
+import Ebook from "./Eragon.epub";
 
 const ownStyles = {
   ...ReactReaderStyle,
